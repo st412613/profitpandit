@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ProfitPandit — Profit Calculator for Amazon.in Sellers</title>
+  <meta name="description" content="Free Chrome extension for Amazon India sellers. See your real profit after fees, GST and shipping on any product page. Zero-fee checker. 13 Indian languages." />
+  <style>
+    :root {
+      --navy: #232f3e;
+      --navy-dark: #1a2430;
+      --orange: #ff9900;
+      --orange-dark: #e88b00;
+      --green: #23a95a;
+      --green-bg: #e6f4ea;
+      --grey: #5f6b7a;
+      --light: #f7f9fb;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #222;
+      line-height: 1.6;
+    }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+
+    /* Header */
+    header {
+      background: var(--navy);
+      color: #fff;
+      padding: 14px 0;
+    }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; }
+    .logo-mark {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: var(--navy-dark);
+      display: inline-flex; align-items: flex-end; justify-content: center;
+      gap: 2px; padding: 6px 5px;
+    }
+    .logo-mark i { display: block; width: 6px; background: var(--orange); border-radius: 2px; }
+    .logo-mark i:nth-child(1) { height: 8px; }
+    .logo-mark i:nth-child(2) { height: 13px; }
+    .logo-mark i:nth-child(3) { height: 19px; }
+    header a { color: #fff; text-decoration: none; font-size: 14px; opacity: .9; }
+    header a:hover { opacity: 1; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-dark) 100%);
+      color: #fff;
+      padding: 64px 0 80px;
+      text-align: center;
+    }
+    .hero h1 { font-size: 42px; line-height: 1.2; max-width: 780px; margin: 0 auto 16px; }
+    .hero h1 span { color: var(--orange); }
+    .hero p.sub {
+      font-size: 19px; color: #c8d0d8; max-width: 640px; margin: 0 auto 12px;
+    }
+    .hero p.hindi { font-size: 16px; color: #9aa7b5; margin-bottom: 32px; }
+    .cta {
+      display: inline-block;
+      background: var(--orange);
+      color: #111;
+      font-weight: 800;
+      font-size: 18px;
+      padding: 14px 34px;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(255,153,0,.35);
+      transition: background .15s;
+    }
+    .cta:hover { background: var(--orange-dark); }
+    .cta-note { margin-top: 12px; font-size: 13px; color: #9aa7b5; }
+    .hero img {
+      display: block;
+      max-width: 92%;
+      width: 880px;
+      margin: 48px auto -120px;
+      border-radius: 14px;
+      box-shadow: 0 16px 60px rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    /* Features */
+    .features { padding: 170px 0 40px; background: var(--light); }
+    .features h2, .how h2, .langs h2, .faq h2 { font-size: 30px; text-align: center; margin-bottom: 36px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e7ebf0;
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .card .emoji { font-size: 28px; }
+    .card h3 { font-size: 17px; margin: 10px 0 6px; }
+    .card p { font-size: 14px; color: var(--grey); }
+    .badge-green {
+      display: inline-block; background: var(--green-bg); color: #137333;
+      font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    /* How it works */
+    .how { padding: 56px 0; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .step { text-align: center; padding: 0 10px; }
+    .step .num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--navy); color: var(--orange);
+      font-weight: 800; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .step h3 { font-size: 16px; margin-bottom: 6px; }
+    .step p { font-size: 14px; color: var(--grey); }
+
+    /* Languages */
+    .langs { background: var(--navy); color: #fff; padding: 56px 0; text-align: center; }
+    .langs h2 { color: #fff; }
+    .lang-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 720px; margin: 0 auto; }
+    .chip {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 7px 16px; border-radius: 999px; font-size: 15px;
+    }
+
+    /* FAQ */
+    .faq { padding: 56px 0; background: var(--light); }
+    .faq-item { background: #fff; border: 1px solid #e7ebf0; border-radius: 12px; padding: 18px 22px; margin-bottom: 12px; max-width: 760px; margin-left: auto; margin-right: auto; }
+    .faq-item h3 { font-size: 16px; margin-bottom: 4px; }
+    .faq-item p { font-size: 14px; color: var(--grey); }
+
+    /* Footer */
+    footer { background: var(--navy-dark); color: #9aa7b5; padding: 32px 0; font-size: 13px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; }
+    footer a { color: #c8d0d8; text-decoration: none; margin-right: 16px; }
+    footer a:hover { color: #fff; }
+    .disclaimer { max-width: 720px; font-size: 12px; margin-top: 8px; }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 30px; }
+      .hero img { margin-bottom: -60px; }
+      .features { padding-top: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">
+      <span class="logo-mark"><i></i><i></i><i></i></span>
+      ProfitPandit
+    </div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
+      <a href="mailto:profitpandit.help@gmail.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Know your <span>real profit</span> on Amazon.in — before you sell</h1>
+    <p class="sub">Free Chrome extension that shows your profit &amp; margin on any Amazon.in product page — after referral fees, closing fees, shipping and GST.</p>
+    <p class="hindi">See your true profit on every product — after every fee. Completely free.</p>
+    <a class="cta" href="#" id="install-btn">🚀 Add to Chrome — Free</a>
+    <div class="cta-note">Coming soon to the Chrome Web Store — under review</div>
+    <img src="screenshot-hero.png" alt="ProfitPandit panel on an Amazon.in product page showing zero referral fee badge and profit calculator" />
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <h2>Why sellers use ProfitPandit</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="emoji">✅</div>
+        <span class="badge-green">Only in ProfitPandit</span>
+        <h3>Zero-Fee Checker</h3>
+        <p>Amazon removed referral fees on 12.5 crore+ products under ₹1,000 (March 2026). Instantly see if a product qualifies — and how much you save.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🧮</div>
+        <h3>Real profit, not guesses</h3>
+        <p>Category-wise referral rates, closing fee slabs, Easy Ship estimates and 18% GST on fees — the complete math, on the page itself.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🇮🇳</div>
+        <h3>13 Indian languages</h3>
+        <p>From Hindi and Tamil to Odia and Urdu — the only seller tool that speaks your language. Switch anytime.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🔒</div>
+        <h3>100% private</h3>
+        <p>No account. No sign-up. No data collection. Everything runs locally in your browser — nothing is sent anywhere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Open any product</h3>
+        <p>Browse any product page on Amazon.in — yours or a competitor's.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Enter your cost</h3>
+        <p>The panel auto-detects price &amp; category. Just add your cost price and weight.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>See your profit</h3>
+        <p>Full fee breakdown and your real margin — in one click.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="langs">
+  <div class="wrap">
+    <h2>Speaks your language</h2>
+    <div class="lang-chips">
+      <span class="chip">English</span><span class="chip">हिंदी</span><span class="chip">বাংলা</span>
+      <span class="chip">தமிழ்</span><span class="chip">తెలుగు</span><span class="chip">मराठी</span>
+      <span class="chip">ગુજરાતી</span><span class="chip">ಕನ್ನಡ</span><span class="chip">മലയാളം</span>
+      <span class="chip">ਪੰਜਾਬੀ</span><span class="chip">ଓଡ଼ିଆ</span><span class="chip">অসমীয়া</span>
+      <span class="chip">اردو</span>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <h3>Is it really free?</h3>
+      <p>Yes — the profit calculator and zero-fee checker are free, forever. Advanced features (sales estimates, keyword research, competitor tracking) will come later as an optional Pro plan.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Are the numbers exact?</h3>
+      <p>They are close estimates based on Amazon.in's published fee structures (updated for the March 2026 changes). Your exact fees depend on your sub-category and account — always verify on Seller Central before big decisions.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do you see my Amazon account or data?</h3>
+      <p>No. The extension has no access to your Amazon account. It only reads the public price and category of the page you're viewing, and all calculations happen inside your browser.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Which marketplaces are supported?</h3>
+      <p>Amazon.in today. Meesho and Flipkart support are on the roadmap.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="mailto:profitpandit.help@gmail.com">profitpandit.help@gmail.com</a>
+    </div>
+    <div>© 2026 ProfitPandit</div>
+    <div class="disclaimer">
+      ProfitPandit is an independent tool and is not affiliated with, endorsed by, or sponsored by Amazon.com, Inc. or its affiliates. "Amazon" is a trademark of Amazon.com, Inc. All figures shown are estimates.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

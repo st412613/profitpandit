@@ -1,47 +1,51 @@
-# ProfitPandit
+# 🛒 ProfitPandit
 
-Chrome extension for Indian e-commerce sellers — Amazon.in profit calculator (MVP).
-Full plan: [BLUEPRINT.md](BLUEPRINT.md)
+**Profit Calculator for Amazon.in Sellers — free Chrome extension**
 
-## Extension ko Chrome mein load kaise karein (development mode)
+Know your **real profit** on any Amazon.in product — after referral fees, closing fees, shipping and GST — right on the product page. No spreadsheets, no guesswork.
 
-1. Chrome kholo → address bar mein `chrome://extensions` type karo
-2. Right-top mein **Developer mode** ON karo
-3. **Load unpacked** button dabao
-4. Ye folder select karo: `saas-product/extension`
-5. Ab koi bhi Amazon.in product page kholo (koi bhi product → uska page) —
-   right side mein **ProfitPandit panel** dikhega
+🌐 **Website:** [st412613.github.io/profitpandit](https://st412613.github.io/profitpandit/)
+🏪 **Chrome Web Store:** Coming soon — under review
 
-## Test kaise karein
+![ProfitPandit in action](screenshot-hero.png)
 
-1. Amazon.in par koi product kholo (e.g. koi 500–1000 rupaye wala item)
-2. Panel mein apna **cost price** aur **weight** daalo
-3. **Profit Nikaalo** dabao — fees ka breakdown aur final profit/loss dikhega
+---
 
-## Code change karne ke baad
+## ✨ Features
 
-`chrome://extensions` par jao → ProfitPandit card par **reload (↻)** icon dabao →
-Amazon page refresh karo.
+- **⚡ Instant Profit Calculator** — auto-detects the selling price and category; you enter your cost price and weight, it shows your true profit and margin after *all* deductions
+- **✅ Zero-Fee Checker** — Amazon removed referral fees on 12.5 crore+ products under ₹1,000 (March 2026). ProfitPandit instantly tells you if a product qualifies and how much you save. *No other tool does this.*
+- **📊 Complete fee breakdown** — category-wise referral rates, closing fee slabs, Easy Ship shipping estimates, and 18% GST on fees
+- **🇮🇳 13 Indian languages** — English, हिंदी, বাংলা, தமிழ், తెలుగు, मराठी, ગુજરાતી, ಕನ್ನಡ, മലയാളം, ਪੰਜਾਬੀ, ଓଡ଼ିଆ, অসমীয়া, اردو
+- **🔒 100% private** — no account, no sign-up, no data collection; everything runs locally in your browser
+- **🆓 Free** — the calculator and zero-fee checker are free forever
 
-## Folder structure
+## 🚀 How it works
 
-```
-extension/
-  manifest.json          — extension ki config (MV3)
-  content/
-    selectors.js         — Amazon.in ke DOM selectors (ek jagah, easy to fix)
-    fees.js              — fee structure + profit calculation
-    panel.js             — floating panel UI + logic
-    panel.css            — panel styling
-  popup/
-    popup.html           — toolbar icon click par dikhne wala popup
-  icons/                 — placeholder icons (baad mein designer wale lagenge)
-```
+1. **Open any product page** on Amazon.in — yours or a competitor's
+2. **Enter your cost price and weight** in the ProfitPandit panel (price and category are detected automatically)
+3. **See your real profit** — full fee breakdown and margin, in one click
 
-## Abhi ke known limitations (Week 1–2 ka kaam)
+## 🗺️ Roadmap
 
-- Fee rates simplified hain — Amazon Seller Central ke current rate card se
-  verify/expand karne hain ([BLUEPRINT.md](BLUEPRINT.md) section 3, Week 2)
-- Sirf desktop layout ke selectors hain; kuch page layouts par price detect
-  nahi hogi (panel manual entry offer karta hai)
-- FBA vs Easy Ship ka difference abhi nahi hai — abhi Easy Ship assume karta hai
+- [x] Profit calculator with March 2026 fee structure
+- [x] Zero-Fee Checker
+- [x] 13 Indian languages (with RTL support for Urdu)
+- [ ] Chrome Web Store launch
+- [ ] Sales estimates & keyword research (Pro)
+- [ ] Competitor price tracking (Pro)
+- [ ] Meesho & Flipkart support
+
+## 💬 Support & Feedback
+
+- **Email:** [profitpandit.help@gmail.com](mailto:profitpandit.help@gmail.com)
+- **Bug reports / feature requests:** [Open an issue](../../issues)
+
+## 📄 Legal
+
+- [Privacy Policy](https://st412613.github.io/profitpandit/privacy.html) — we collect **no** data
+- [Terms of Use](https://st412613.github.io/profitpandit/terms.html)
+
+---
+
+*ProfitPandit is an independent tool and is not affiliated with, endorsed by, or sponsored by Amazon.com, Inc. or its affiliates. "Amazon" is a trademark of Amazon.com, Inc. All figures shown are estimates — always verify exact fees in your Seller Central account.*
