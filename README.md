@@ -5,7 +5,7 @@
 Know your **real profit** on any Amazon.in product — after referral fees, closing fees, shipping and GST — right on the product page. No spreadsheets, no guesswork.
 
 🌐 **Website:** [st412613.github.io/profitpandit](https://st412613.github.io/profitpandit/)
-🏪 **Chrome Web Store:** Coming soon — under review
+🏪 **Chrome Web Store:** [Install ProfitPandit — Free](https://chromewebstore.google.com/detail/profitpandit-%E2%80%94-profit-cal/mcbpadkpjpjnnhobgcgfamhpgdkknfdl)
 
 ![ProfitPandit in action](screenshot-hero.png)
 
@@ -31,7 +31,7 @@ Know your **real profit** on any Amazon.in product — after referral fees, clos
 - [x] Profit calculator with March 2026 fee structure
 - [x] Zero-Fee Checker
 - [x] 13 Indian languages (with RTL support for Urdu)
-- [ ] Chrome Web Store launch
+- [x] Chrome Web Store launch ✅ (August 2026)
 - [ ] Sales estimates & keyword research (Pro)
 - [ ] Competitor price tracking (Pro)
 - [ ] Meesho & Flipkart support
